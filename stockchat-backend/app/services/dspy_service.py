@@ -9,10 +9,35 @@ load_dotenv()
 
 
 # Configure DSPy
-github = dspy.LM(model="openai/gpt-4o-mini", api_base="https://models.inference.ai.azure.com", api_key=os.environ["GITHUB_TOKEN"])
-gemini = dspy.LM(model="gemini/gemini-1.5-flash-8b-latest", api_key=os.environ["GEMINI_API_KEY"])
-azure = dspy.LM(model="azure/gpt-4o-mini", api_base="https://hkust.azure-api.net", api_key=os.environ["AZURE_UST_SECONDARY_KEY"], api_version="2024-06-01")
-dspy.settings.configure(lm=github, max_requests_per_minute=15, trace=[])
+def get_available_llm():
+    """Get the first available LLM based on environment variables."""
+    if os.environ.get("OPENAI_API_KEY"):
+        return dspy.LM(
+            model="openai/gpt-4o-mini",
+            api_key=os.environ["OPENAI_API_KEY"]
+        )
+    elif os.environ.get("DEEPSEEK_API_KEY"):
+        return dspy.LM(
+            model="deepseek/deepseek-chat",
+            api_key=os.environ["DEEPSEEK_API_KEY"]
+        )
+    elif os.environ.get("GITHUB_TOKEN"):
+        return dspy.LM(
+            model="openai/gpt-4o-mini",
+            api_base="https://models.inference.ai.azure.com",
+            api_key=os.environ["GITHUB_TOKEN"]
+        )
+    elif os.environ.get("GEMINI_API_KEY"):
+        return dspy.LM(
+            model="gemini/gemini-2.0-flash-exp",
+            api_key=os.environ["GEMINI_API_KEY"]
+        )
+    else:
+        raise ValueError("No LLM API keys found in environment variables")
+
+# Initialize the LLM and configure DSPy
+active_llm = get_available_llm()
+dspy.settings.configure(lm=active_llm, max_requests_per_minute=15, trace=[])
 
 # Pydantic Models
 class StockQuery(BaseModel):

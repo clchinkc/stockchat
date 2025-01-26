@@ -1,89 +1,85 @@
-# StockChat
+# StockChat: DSPy-powered Stock Analysis Agent (OpenAI, DeepSeek, Gemini, GitHub)
 
-StockChat is a web application that combines real-time chat functionality with stock market analysis capabilities. The application is built using React for the frontend and FastAPI for the backend, with integrated DSPy for advanced stock analysis.
+**An open-source alternative to Perplexity Finance.**
 
-## Project Structure
+[![App Screen Recording](https://raw.githubusercontent.com/clchinkc/streamlit-editor/main/screenshot.jpg)](https://raw.githubusercontent.com/clchinkc/streamlit-editor/main/screen_recording.mov)
 
-- `/stockchat-frontend` - React + TypeScript frontend application
-- `/stockchat-backend` - FastAPI + Python backend service
+StockChat offers a real-time chat interface integrated with AI-powered stock analysis capabilities. Built for developers looking to implement financial NLP solutions.
 
-## Getting Started
+## 📚 Table of Contents
+- [StockChat: DSPy-powered Stock Analysis Agent (OpenAI, DeepSeek, Gemini, GitHub)](#stockchat-dspy-powered-stock-analysis-agent-openai-deepseek-gemini-github)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [🚀 Quick Start (Docker)](#-quick-start-docker)
+  - [✨ Key Components](#-key-components)
+  - [🛠️ Local Development Setup](#️-local-development-setup)
+    - [Backend Service](#backend-service)
+    - [Frontend Application](#frontend-application)
+  - [🧩 System Architecture](#-system-architecture)
+  - [📦 Technical Stack](#-technical-stack)
+  - [📄 License](#-license)
 
-### Backend Setup
-
-1. Navigate to the backend directory:
-   ```bash
-   cd stockchat-backend
-   ```
-
-2. Create and activate a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # For Unix/MacOS
-   # or
-   .\venv\Scripts\activate  # For Windows
-   ```
-
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Start the backend server:
-   ```bash
-   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-   ```
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-   ```bash
-   cd stockchat-frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-## Docker Deployment
-
-For containerized deployment, use Docker Compose:
+## 🚀 Quick Start (Docker)
 
 ```bash
-   docker-compose up --build
-   ```
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API keys (GITHUB_TOKEN or GEMINI_API_KEY required)
 
+docker-compose up --build
+```
+And the app will be running on http://localhost:5173.
 
-## Features
+## ✨ Key Components
 
-- Real-time chat functionality
-- Stock market analysis integration
-- Natural language processing capabilities via DSPy
-- REST API endpoints for data communication
+- 🧠 **DSPy Integration** - Built-in financial analysis pipelines
+- 📊 **Market Data Processing** - Extensible data ingestion framework
+- 🔍 **Research Cache** - SQLite-based analysis result storage
+- 🌐 **Data Saving** - Users can save their analysis through a specific URL endpoint
 
-## Technical Stack
+## 🛠️ Local Development Setup
 
-- Frontend:
-  - React
-  - TypeScript
-  - TailwindCSS
-  - Vite
+### Backend Service
+```bash
+cd stockchat-backend
+python -m venv venv
+source venv/bin/activate  # Unix/MacOS
+# .\venv\Scripts\activate  # Windows
 
-- Backend:
-  - Python
-  - FastAPI
-  - DSPy for analysis
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API keys (either one required):
+# OPENAI_API_KEY=your_openai_api_key
+# DEEPSEEK_API_KEY=your_deepseek_api_key
+# GEMINI_API_KEY=your_gemini_api_key
+# GITHUB_TOKEN=your_github_token
 
-- Deployment:
-  - Docker
-  - Docker Compose
+pip install -r requirements.txt
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
 
-## Development
+### Frontend Application
+```bash
+cd stockchat-frontend
+npm install
+npm run dev
+```
+And the app will be running on http://localhost:5173.
 
-The application can be run either in a local development environment (separate frontend and backend servers) or using Docker Compose for a containerized setup.
+## 🧩 System Architecture
+
+[![System Architecture](https://mermaid.ink/img/pako:eNqdVMtu2zAQ_BWCRoAEsAG3ARxHhwJ6GQ3QAG6cXlr1wEgri7BMuuQqjuH437N6WiniQ6yTuDs73J0hueexToA7PM31Ns6EQfYYRIrRd3HB7oVUzNfrjVag0NbxXxbMZcRT4aRiVNCiikT8qk7PjFYIKukgCdgV6g3zM4HsjnImFTF0eE_Eqz6cuJ6Jswkzd37XQR90QdX7FmnKJXOVyHdW2iYb8UMNDhbzXUf6ZMpJyhBbEL_s7X8vzAqwQ1YajHKpoMmwQKB414Yv4gyO41H6SVhgD2BBmDir8x068P5c_odc_PwhqfOgWV_9jVQnua-VghilVj252Wj0rRP2vcxl6rXtRRijtyMjlxmy74-Pc-rpXwGWnOOvraLvVK-IG-F6Ep8knRsdg7VsKzErOUtFj3KfLJsBki7l_Cw1el1W1uL2LfigOocUaQYsjKqrUX9i1wVqA8yALXK0TKqytPbmaOOpTWnQZ5lAf9dT-n24dyANucjcuJSr6tnrmbzAHZ2wZSUji8lIIyyWAYQXpECuTeO-JSQczU5lnjuD23EY3o6HFo1egTO4vr5u_kdbmWDmfN28DCsSZzCuvj5X23lNNb3xw9A7k6pSv-aZzbyJ_-VMnubQtUzu-MY9k6n2tCYKAnccBOeO5rXtjMPJ1D-Tpbq7NU84CSezc8dqLkjj_nTm3U4_wcSHfA1mLWRC7_y-5I04ZrCmN8qh34TIIx6pA-FEgXqxUzF30BQw5PTELjNOhzu3tCo2dB0gkGJpxLqLboT6rXW7PrwBECQNfA)](https://mermaid.live/edit#pako:eNqdVMtu2zAQ_BWCRoAEsAG3ARxHhwJ6GQ3QAG6cXlr1wEgri7BMuuQqjuH437N6WiniQ6yTuDs73J0hueexToA7PM31Ns6EQfYYRIrRd3HB7oVUzNfrjVag0NbxXxbMZcRT4aRiVNCiikT8qk7PjFYIKukgCdgV6g3zM4HsjnImFTF0eE_Eqz6cuJ6Jswkzd37XQR90QdX7FmnKJXOVyHdW2iYb8UMNDhbzXUf6ZMpJyhBbEL_s7X8vzAqwQ1YajHKpoMmwQKB414Yv4gyO41H6SVhgD2BBmDir8x068P5c_odc_PwhqfOgWV_9jVQnua-VghilVj252Wj0rRP2vcxl6rXtRRijtyMjlxmy74-Pc-rpXwGWnOOvraLvVK-IG-F6Ep8knRsdg7VsKzErOUtFj3KfLJsBki7l_Cw1el1W1uL2LfigOocUaQYsjKqrUX9i1wVqA8yALXK0TKqytPbmaOOpTWnQZ5lAf9dT-n24dyANucjcuJSr6tnrmbzAHZ2wZSUji8lIIyyWAYQXpECuTeO-JSQczU5lnjuD23EY3o6HFo1egTO4vr5u_kdbmWDmfN28DCsSZzCuvj5X23lNNb3xw9A7k6pSv-aZzbyJ_-VMnubQtUzu-MY9k6n2tCYKAnccBOeO5rXtjMPJ1D-Tpbq7NU84CSezc8dqLkjj_nTm3U4_wcSHfA1mLWRC7_y-5I04ZrCmN8qh34TIIx6pA-FEgXqxUzF30BQw5PTELjNOhzu3tCo2dB0gkGJpxLqLboT6rXW7PrwBECQNfA)
+
+## 📦 Technical Stack
+
+| Category       | Technologies                                                                 |
+|----------------|-----------------------------------------------------------------------------|
+| Frontend       | React, TypeScript, TailwindCSS, Vite                                        |
+| Backend        | FastAPI, Python, DSPy                                                      |
+| Database       | SQLite                                                                      |
+| API Protocols  | HTTP, REST                                                                  |
+| Deployment     | Docker, Docker Compose                                                      |
+| AI Integration | Custom DSPy pipelines for financial analysis                               |
+
+## 📄 License
+
+MIT Licensed - See [LICENSE](LICENSE) for details.
