@@ -21,7 +21,7 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(stock.router, prefix=f"{settings.API_V1_STR}/stock", tags=["stock"]) 
+app.include_router(stock.router, prefix=f"{settings.API_V1_STR}/stock", tags=["stock"])
 
 logging.basicConfig(
     level=logging.INFO,

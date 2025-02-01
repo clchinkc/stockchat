@@ -120,7 +120,7 @@ class ApiClient {
 
   private static async executeRequest(
     endpoint: string,
-    options?: RequestInit,
+    options?: RequestInit & { body?: Record<string, unknown> | string },
     useCache = true
   ): Promise<ApiResponse> {
     const cacheKey = this.getCacheKey(endpoint, options?.body);

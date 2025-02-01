@@ -16,6 +16,7 @@ StockChat offers a real-time chat interface integrated with AI-powered stock ana
     - [Frontend Application](#frontend-application)
   - [🧩 System Architecture](#-system-architecture)
   - [📦 Technical Stack](#-technical-stack)
+  - [🎯 Component Structure](#-component-structure)
   - [📄 License](#-license)
 
 ## 🚀 Quick Start (Docker)
@@ -23,7 +24,7 @@ StockChat offers a real-time chat interface integrated with AI-powered stock ana
 ```bash
 # Set up environment variables
 cp .env.example .env
-# Edit .env with your API keys (GITHUB_TOKEN or GEMINI_API_KEY required)
+# Edit .env with your API keys (OPENAI_API_KEY or DEEPSEEK_API_KEY or GEMINI_API_KEY or GITHUB_TOKEN required)
 
 docker-compose up --build
 ```
@@ -32,11 +33,15 @@ And the app will be running on http://localhost:5173.
 ## ✨ Key Components
 
 - 🧠 **DSPy Integration** - Built-in financial analysis pipelines
+- 📈 **Trading Signals** - Real-time visualization of technical indicators
 - 📊 **Market Data Processing** - Extensible data ingestion framework
 - 🔍 **Research Cache** - SQLite-based analysis result storage
 - 🌐 **Data Saving** - Users can save their analysis through a specific URL endpoint
+- 🧠 **TA-Lib Integration** - Professional technical analysis calculations
 
 ## 🛠️ Local Development Setup
+
+First, install TA-Lib to your computer according to [TA-Lib Python Install Guide](https://ta-lib.github.io/ta-lib-python/install.html).
 
 ### Backend Service
 ```bash
@@ -74,11 +79,33 @@ And the app will be running on http://localhost:5173.
 | Category       | Technologies                                                                 |
 |----------------|-----------------------------------------------------------------------------|
 | Frontend       | React, TypeScript, TailwindCSS, Vite                                        |
-| Backend        | FastAPI, Python, DSPy                                                      |
+| Backend        | FastAPI, Python, DSPy, TA-Lib                                              |
 | Database       | SQLite                                                                      |
-| API Protocols  | HTTP, REST                                                                  |
 | Deployment     | Docker, Docker Compose                                                      |
 | AI Integration | Custom DSPy pipelines for financial analysis                               |
+
+## 🎯 Component Structure
+
+```
+src/
+├── components/
+│   ├── ui/          # Shadcn UI components
+│   ├── Header.tsx   # App header with theme toggle
+│   ├── LandingPage.tsx  # Welcome screen with examples
+│   ├── LoadingPage.tsx  # Loading state display
+│   ├── MessageInput.tsx # Chat input component
+│   ├── MetricCard.tsx   # Financial metrics display
+│   ├── ResultPage.tsx   # Analysis results view
+│   ├── ShareButton.tsx  # Share functionality
+│   ├── StockChart.tsx   # Interactive stock chart
+│   ├── StockHeader.tsx  # Stock price header
+│   └── TradingSignal.tsx # Trading indicators
+├── util/
+│   ├── api.ts      # API client
+│   ├── theme.ts    # Theme management
+│   └── utils.ts    # Utility functions
+└── App.tsx         # Main application
+```
 
 ## 📄 License
 
